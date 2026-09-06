@@ -34,34 +34,36 @@ function Command({
 }
 
 function CommandDialog({
-  title = "Command Palette",
-  description = "Search for a command to run...",
-  children,
-  className,
-  showCloseButton = false,
-  ...props
-}: React.ComponentProps<typeof Dialog> & {
-  title?: string
-  description?: string
-  className?: string
-  showCloseButton?: boolean
+                         title = "Command Palette",
+                         description = "Search for a command to run...",
+                         children,
+                         className,
+                         showCloseButton = false,
+                         ...props
+                       }: React.ComponentProps<typeof Dialog> & {
+                      title?: string
+                      description?: string
+                      className?: string
+                      showCloseButton?: boolean
 }) {
   return (
-    <Dialog {...props}>
-      <DialogHeader className="sr-only">
-        <DialogTitle>{title}</DialogTitle>
-        <DialogDescription>{description}</DialogDescription>
-      </DialogHeader>
-      <DialogContent
-        className={cn(
-          "top-1/3 translate-y-0 overflow-hidden rounded-xl! p-0",
-          className
-        )}
-        showCloseButton={showCloseButton}
-      >
-        {children}
-      </DialogContent>
-    </Dialog>
+      <Dialog {...props}>
+        <DialogHeader className="sr-only">
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>{description}</DialogDescription>
+        </DialogHeader>
+        <DialogContent
+            className={cn(
+                "top-1/3 translate-y-0 overflow-hidden rounded-xl! p-0",
+                className
+            )}
+            showCloseButton={showCloseButton}
+        >
+          <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium **:data-[slot=command-input-wrapper]:h-12">
+            {children}
+          </Command>
+        </DialogContent>
+      </Dialog>
   )
 }
 
