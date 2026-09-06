@@ -27,7 +27,6 @@ const UserDropdown = ({user} : {user: User}) => {
         router.push("/sign-in");
     }
 
-
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
