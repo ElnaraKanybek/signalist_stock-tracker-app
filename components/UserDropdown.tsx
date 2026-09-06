@@ -15,17 +15,18 @@ import {AppRouterInstance} from "next/dist/shared/lib/app-router-context.shared-
 import {useRouter} from "next/navigation";
 import {LogOut} from "lucide-react";
 import NavItems from "@/components/NavItems";
+import {signOut} from "@/lib/actions/auth.actions";
 
 
-const UserDropdown = () => {
+const UserDropdown = ({user} : {user: User}) => {
     const router: AppRouterInstance = useRouter();
 
 
     const handleSignOut = async () => {
+        await signOut();
         router.push("/sign-in");
     }
 
-    const user = { name: 'Ella', email: 'contact@kanel.com'}
 
     return (
         <DropdownMenu>
