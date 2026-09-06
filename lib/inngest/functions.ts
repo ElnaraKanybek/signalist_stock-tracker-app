@@ -4,7 +4,7 @@ import {sendNewsSummaryEmail, sendWelcomeEmail} from "@/lib/nodemailer";
 import {getAllUsersForNewsEmail} from "@/lib/actions/user.actions";
 import {getWatchlistSymbolsByEmail} from "@/lib/actions/watchlist.actions";
 import {getNews} from "@/lib/actions/finnhub.actions";
-import {formatDateToday} from "@/lib/utils";
+import {formatDateToday, getFormattedTodayDate} from "@/lib/utils";
 
 export const sendSignUpEmail = inngest.createFunction(
     {
@@ -88,7 +88,7 @@ export const sendDailyNewsSummary = inngest.createFunction(
                     }
                     perUser.push({user, articles});
                 } catch (e) {
-                    console.error('Daily-news: error preparing user news', user.email, e);
+                    console.error('Daily-news: error preparing user news', user.id, e);
                     perUser.push({user, articles: []});
                 }
             }
@@ -97,7 +97,7 @@ export const sendDailyNewsSummary = inngest.createFunction(
         });
 
         // Step #3 Summarize news via AI
-        const userNewsSummaries: { user: User; newsContent: string | null }[] = [];
+        const userNewsSummaries: { user: UserForNewsEmail; newsContent: string | null }[] = [];
 
         for (const {user, articles} of results) {
             try {
@@ -115,7 +115,7 @@ export const sendDailyNewsSummary = inngest.createFunction(
 
                 userNewsSummaries.push({user, newsContent});
             } catch (e) {
-                console.error('Failed to summarize news for:', user.email);
+                console.error('Failed to summarize news for:', user.id);
                 userNewsSummaries.push({user, newsContent: null});
             }
         }
@@ -125,7 +125,7 @@ export const sendDailyNewsSummary = inngest.createFunction(
                 userNewsSummaries.map(async ({user, newsContent}) => {
                     if (!newsContent) return false;
 
-                    return await sendNewsSummaryEmail({email: user.email, date: formatDateToday, newsContent})
+                    return await sendNewsSummaryEmail({email: user.email, date: getFormattedTodayDate(), newsContent})
                 })
             )
         })
