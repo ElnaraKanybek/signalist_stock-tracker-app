@@ -4,6 +4,12 @@ declare global {
         password: string;
     };
 
+    type UserForNewsEmail = {
+        id: string;
+        email: string;
+        name: string;
+    };
+
     type SignUpFormData = {
         fullName: string;
         email: string;
@@ -65,6 +71,12 @@ declare global {
         email: string;
         name: string;
         intro: string;
+    };
+
+    type NewsSummaryEmailData = {
+        email: string;
+        date: string;
+        newsContent: string;
     };
 
     type User = {
