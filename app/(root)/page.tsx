@@ -1,5 +1,6 @@
 import {Button} from "@/components/ui/button";
 import TradingViewWidget from "@/components/TradingViewWidget";
+import { getStockExchange } from "@/lib/actions/finnhub.actions";
 import {
     HEATMAP_WIDGET_CONFIG,
     MARKET_DATA_WIDGET_CONFIG,
@@ -10,6 +11,8 @@ import {
 
 const Home = () => {
     const scriptUrl = `https://s3.tradingview.com/external-embedding/embed-widget-`
+
+
     return (
 
         <div className="flex min-h-screen home-wrapper">

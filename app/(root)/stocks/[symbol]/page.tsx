@@ -1,4 +1,5 @@
 import TradingViewWidget from "@/components/TradingViewWidget";
+import { getStockExchange } from "@/lib/actions/finnhub.actions";
 import {
     SYMBOL_INFO_WIDGET_CONFIG,
     CANDLE_CHART_WIDGET_CONFIG,
@@ -11,6 +12,8 @@ import {
 export default async function StockDetails({ params }: StockDetailsPageProps) {
     const { symbol } = await params;
     const scriptUrl = `https://s3.tradingview.com/external-embedding/embed-widget-`;
+    const exchange = await getStockExchange(symbol);
+    const fullSymbol = `${exchange}:${symbol.toUpperCase()}`;
 
     return (
         <div className="flex min-h-screen p-4 md:p-6 lg:p-8">
@@ -19,20 +22,20 @@ export default async function StockDetails({ params }: StockDetailsPageProps) {
                 <div className="flex flex-col gap-6">
                     <TradingViewWidget
                         scriptUrl={`${scriptUrl}symbol-info.js`}
-                        config={SYMBOL_INFO_WIDGET_CONFIG(symbol)}
+                        config={SYMBOL_INFO_WIDGET_CONFIG(fullSymbol)}
                         height={170}
                     />
 
                     <TradingViewWidget
                         scriptUrl={`${scriptUrl}advanced-chart.js`}
-                        config={CANDLE_CHART_WIDGET_CONFIG(symbol)}
+                        config={CANDLE_CHART_WIDGET_CONFIG(fullSymbol)}
                         className="custom-chart"
                         height={600}
                     />
 
                     <TradingViewWidget
                         scriptUrl={`${scriptUrl}advanced-chart.js`}
-                        config={BASELINE_WIDGET_CONFIG(symbol)}
+                        config={BASELINE_WIDGET_CONFIG(fullSymbol)}
                         className="custom-chart"
                         height={600}
                     />
@@ -43,19 +46,19 @@ export default async function StockDetails({ params }: StockDetailsPageProps) {
 
                     <TradingViewWidget
                         scriptUrl={`${scriptUrl}technical-analysis.js`}
-                        config={TECHNICAL_ANALYSIS_WIDGET_CONFIG(symbol)}
+                        config={TECHNICAL_ANALYSIS_WIDGET_CONFIG(fullSymbol)}
                         height={400}
                     />
 
                     <TradingViewWidget
                         scriptUrl={`${scriptUrl}company-profile.js`}
-                        config={COMPANY_PROFILE_WIDGET_CONFIG(symbol)}
+                        config={COMPANY_PROFILE_WIDGET_CONFIG(fullSymbol)}
                         height={440}
                     />
 
                     <TradingViewWidget
                         scriptUrl={`${scriptUrl}financials.js`}
-                        config={COMPANY_FINANCIALS_WIDGET_CONFIG(symbol)}
+                        config={COMPANY_FINANCIALS_WIDGET_CONFIG(fullSymbol)}
                         height={464}
                     />
                 </div>

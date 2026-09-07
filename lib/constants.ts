@@ -1,3 +1,5 @@
+import {symbol} from "better-auth";
+
 export const NAV_ITEMS = [
     { href: '/', label: 'Dashboard' },
     { href: '/search', label: 'Search' },
@@ -170,8 +172,8 @@ export const MARKET_DATA_WIDGET_CONFIG = {
     ],
 };
 
-export const SYMBOL_INFO_WIDGET_CONFIG = (symbol: string) => ({
-    symbol: symbol.toUpperCase(),
+export const SYMBOL_INFO_WIDGET_CONFIG = (fullSymbol: string) => ({
+    symbol: fullSymbol,
     colorTheme: 'dark',
     isTransparent: true,
     locale: 'en',
@@ -179,7 +181,7 @@ export const SYMBOL_INFO_WIDGET_CONFIG = (symbol: string) => ({
     height: 170,
 });
 
-export const CANDLE_CHART_WIDGET_CONFIG = (symbol: string) => ({
+export const CANDLE_CHART_WIDGET_CONFIG = (fullSymbol: string) => ({
     allow_symbol_change: false,
     calendar: false,
     details: true,
@@ -192,7 +194,7 @@ export const CANDLE_CHART_WIDGET_CONFIG = (symbol: string) => ({
     locale: 'en',
     save_image: false,
     style: 1,
-    symbol: symbol.toUpperCase(),
+    symbol: fullSymbol,
     theme: 'dark',
     timezone: 'Etc/UTC',
     backgroundColor: '#141414',
@@ -205,7 +207,7 @@ export const CANDLE_CHART_WIDGET_CONFIG = (symbol: string) => ({
     height: 600,
 });
 
-export const BASELINE_WIDGET_CONFIG = (symbol: string) => ({
+export const BASELINE_WIDGET_CONFIG = (fullSymbol: string) => ({
     allow_symbol_change: false,
     calendar: false,
     details: false,
@@ -218,7 +220,7 @@ export const BASELINE_WIDGET_CONFIG = (symbol: string) => ({
     locale: 'en',
     save_image: false,
     style: 10,
-    symbol: symbol.toUpperCase(),
+    symbol: fullSymbol,
     theme: 'dark',
     timezone: 'Etc/UTC',
     backgroundColor: '#141414',
@@ -231,10 +233,10 @@ export const BASELINE_WIDGET_CONFIG = (symbol: string) => ({
     height: 600,
 });
 
-export const TECHNICAL_ANALYSIS_WIDGET_CONFIG = (symbol: string) => ({
-    symbol: symbol.toUpperCase(),
+export const TECHNICAL_ANALYSIS_WIDGET_CONFIG = (fullSymbol: string) => ({
+    symbol: fullSymbol,
     colorTheme: 'dark',
-    isTransparent: 'true',
+    isTransparent: true,
     locale: 'en',
     width: '100%',
     height: 400,
@@ -242,19 +244,19 @@ export const TECHNICAL_ANALYSIS_WIDGET_CONFIG = (symbol: string) => ({
     largeChartUrl: '',
 });
 
-export const COMPANY_PROFILE_WIDGET_CONFIG = (symbol: string) => ({
-    symbol: `NASDAQ:${symbol.toUpperCase()}`,
+export const COMPANY_PROFILE_WIDGET_CONFIG = (fullSymbol: string) => ({
+    symbol: fullSymbol,
     colorTheme: 'dark',
-    isTransparent: 'true',
+    isTransparent: true,
     locale: 'en',
     width: '100%',
     height: 440,
 });
 
-export const COMPANY_FINANCIALS_WIDGET_CONFIG = (symbol: string) => ({
-    symbol: symbol.toUpperCase(),
+export const COMPANY_FINANCIALS_WIDGET_CONFIG = (fullSymbol: string) => ({
+    symbol: fullSymbol,
     colorTheme: 'dark',
-    isTransparent: 'true',
+    isTransparent: true,
     locale: 'en',
     width: '100%',
     height: 464,

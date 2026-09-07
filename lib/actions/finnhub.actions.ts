@@ -98,6 +98,26 @@ export async function getNews(symbols?: string[]): Promise<MarketNewsArticle[]> 
     }
 }
 
+export async function getStockExchange(symbol: string): Promise<string> {
+    try {
+        const token = process.env.FINNHUB_API_KEY ?? NEXT_PUBLIC_FINNHUB_API_KEY;
+        if (!token) return 'NASDAQ'; // sensible fallback
+
+        const url = `${FINNHUB_BASE_URL}/stock/profile2?symbol=${encodeURIComponent(symbol.toUpperCase())}&token=${token}`;
+        const profile = await fetchJSON<{ exchange?: string }>(url, 3600);
+
+        // Finnhub returns things like "NASDAQ NMS - GLOBAL MARKET" — normalize to just the exchange code
+        const raw = profile?.exchange || '';
+        if (raw.includes('NASDAQ')) return 'NASDAQ';
+        if (raw.includes('NYSE')) return 'NYSE';
+        if (raw.includes('AMEX')) return 'AMEX';
+        return 'NASDAQ'; // fallback default
+    } catch (e) {
+        console.error('Error fetching exchange for', symbol, e);
+        return 'NASDAQ';
+    }
+}
+
 export const searchStocks = cache(async (query?: string): Promise<StockWithWatchlistStatus[]> => {
     try {
         const token = process.env.FINNHUB_API_KEY ?? NEXT_PUBLIC_FINNHUB_API_KEY;
