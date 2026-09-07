@@ -6,11 +6,7 @@ A stock market toolkit — sign up, personalize your investing profile, and get 
  
 🔗 **[Live Demo](https://signalist-stock-tracker-app-gamma.vercel.app/)** — try it yourself
  
-## Overview
- 
-- [Core Functionality](#core-functionality)
-- [Tech Stack](#️-tech-stack)
-- [Credits](#credits)
+
 ## Core Functionality
  
 - **Authentication** — email/password sign-up and sign-in powered by Better Auth, backed by MongoDB
@@ -20,7 +16,6 @@ A stock market toolkit — sign up, personalize your investing profile, and get 
 - **Stock detail pages** — each stock page embeds live TradingView widgets: symbol info, candlestick chart, baseline chart, technical analysis, company profile, and financials
 - **Daily AI news summaries** — a scheduled Inngest cron job fetches market news from Finnhub, summarizes it with Gemini, and emails a daily digest to every registered user
 - **Responsive dark-themed UI** — built with Tailwind CSS and shadcn/ui components
-> **Note:** watchlist functionality (saving/tracking favorite stocks) is not yet implemented — the UI includes placeholders for it, but there's no persistence layer behind it yet.
  
 ## 🛠️ Tech Stack
  
